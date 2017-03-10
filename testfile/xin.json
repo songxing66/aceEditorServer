@@ -1,0 +1,45 @@
+{
+	"params": [{
+		"display_name": "ddd",
+		"name": "ddd",
+		"type": 4,
+		"options": [{
+			"name": "1",
+			"value": 0
+		}, {
+			"name": "2",
+			"value": 1
+		}, {
+			"name": "3",
+			"value": 2
+		}],
+		"default": "1"
+	}, {
+		"display_name": "string",
+		"name": "str",
+		"type": 2,
+		"default": "abc"
+	}, {
+		"name": "v9s7Mdl8eTzHGoKIg26_264aUhkH2X2G",
+		"type": 5,
+		"value": "<p>title</p>",
+		"default": "<p>title</p>"
+	}, {
+		"display_name": "单选",
+		"name": "radio",
+		"type": 3,
+		"options": [{
+			"name": "111",
+			"value": 0
+		}, {
+			"name": "222",
+			"value": 1
+		}],
+		"default": "1"
+	}, {
+		"display_name": "循环次数",
+		"name": "loop",
+		"type": 1,
+		"default": "5"
+	}]
+}
