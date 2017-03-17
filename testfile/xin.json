@@ -41,5 +41,6 @@
 		"name": "loop",
 		"type": 1,
 		"default": "5"
-	}]
+	},
+	{}]
 }

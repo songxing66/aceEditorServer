@@ -16,7 +16,7 @@ exports.index = function(req, res) {
         exports[action](req, res);
     }
 };
-exports.getRoot = function(req, res) {
+exports.getRoot = function(req, res) { //获取目录
     var _path = req.body.path;
     //判断文件状态
     fs.stat(_path, function(err, stats) {
@@ -84,27 +84,71 @@ exports.getRoot = function(req, res) {
 }
 
 exports.openFile = function(req, res) {
+    fs.open(req.body.path, 'r+', function(err, fd) {
+        if (err) {
+            res.json({
+                success: false,
+                error: err
+            });
+            return
+        }
+        var content = fs.readFileSync(req.body.path).toString('utf-8');
+        var fileType = req.body.path.substr(req.body.path.lastIndexOf(".")).toLowerCase();
+        // 关闭文件
+        fs.close(fd, function(err) {
+            if (err) {
+                res.json({
+                    success: false,
+                    error: err
+                });
+                return
+            }
+        });
+        res.json({
+            success: true,
+            data: {
+                content: content,
+                fileType: fileType
+            }
+        });
+
+    });
+
+}
+
+
+
+exports.saveFile = function(req, res) { //保存文件
         fs.open(req.body.path, 'r+', function(err, fd) {
             if (err) {
-                return console.error(err);
+                res.json({
+                    success: false,
+                    error: err
+                });
+                return
             }
-            var content = fs.readFileSync(req.body.path).toString('utf-8');
-            var fileType = req.body.path.substr(req.body.path.lastIndexOf(".")).toLowerCase();
-            // 关闭文件
-            fs.close(fd, function(err) {
+            fs.writeFile(req.body.path, req.body.value, function(err) {
                 if (err) {
-                    console.log(err);
+                    res.json({
+                        success: false,
+                        error: err
+                    });
+                    return
                 }
-                console.log("文件关闭成功");
+                // 关闭文件
+                fs.close(fd, function(err) {
+                    if (err) {
+                        res.json({
+                            success: false,
+                            error: err
+                        });
+                        return
+                    }
+                });
+                res.json({
+                    success: true,
+                });
             });
-            res.json({
-                success: true,
-                data: {
-                    content: content,
-                    fileType: fileType
-                }
-            });
-
         });
 
     }
