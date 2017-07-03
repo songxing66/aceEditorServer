@@ -84,6 +84,7 @@ exports.getRoot = function(req, res) { //获取目录
 }
 
 exports.openFile = function(req, res) {
+    console.log(req.body, "ahhahahahhah");
     fs.open(req.body.path, 'r+', function(err, fd) {
         if (err) {
             res.json({

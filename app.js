@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 // app.set('view engine', 'jade'); // 设置模板引擎
 // app.set('views', __dirname + '/views/'); // 设置模板相对路径(相对当前目录)
-// app.use(express.static(__dirname + '/static/'));
+app.use(express.static(__dirname + '/static/'));
 app.use(cookieParser());
 app.use(session({
     secret: 'YTdKHY&H*&(JK=J=L-zAF&G',
